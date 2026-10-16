@@ -165,7 +165,3 @@ src/coin_table.m       caractéristiques officielles des pièces
 Le seuil de couleur et les seuils de Hough sont **réglés à la main** sur les données synthétiques. Leur transfert aux photos réelles est précisément ce que mesure `eval_dataset.m`.
 
 ---
-
-## Licence
-
-MIT. Données Roboflow : CC BY 4.0, auteurs du jeu *euro_detection*.

@@ -1,14 +1,31 @@
 function pxPerMm = calibrate_click(img, knownMm)
-%Echelle (pixels/mm) a partir de deux clics sur une longueur connue.
+% CALIBRATE_CLICK Calcule l'échelle pixels/mm par sélection graphique d'une distance connue.
+%
 %   pxPerMm = CALIBRATE_CLICK(img, knownMm)
-%   ou 50 mm sur une regle posee a cote des pieces).
+%
+%   Entrées :
+%       img     : Matrice de l'image (RGB ou niveaux de gris)
+%       knownMm : Longueur réelle de l'objet de référence en mm (Ex: 25.75 pour 2€)
+%
+%   Sortie :
+%       pxPerMm : Facteur d'échelle calculé (pixels par millimètre)
 
-if nargin < 2, knownMm = 25.75; end
-fig = figure('Name', 'Calibration');
-imshow(img);
-title(sprintf('Cliquez les 2 extremites d''une longueur de %.2f mm', knownMm));
-[x, y] = ginput(2);
-pxPerMm = hypot(diff(x), diff(y)) / knownMm;
-fprintf('Echelle : %.3f pixels/mm\n', pxPerMm);
-close(fig);
+    % Valeur par défaut : diamètre d'une pièce de 2 euros (25.75 mm)
+    if nargin < 2
+        knownMm = 25.75; 
+    end
+    
+    % Ouverture de l'interface graphique de sélection
+    fig = figure('Name', 'Calibration spatiale');
+    imshow(img);
+    title(sprintf('Cliquez sur les 2 extrémités de la référence (%.2f mm)', knownMm));
+    
+    % Capture des deux points de l'utilisateur
+    [x, y] = ginput(2);
+    
+    % Calcul de la distance euclidienne et mise à l'échelle
+    pxPerMm = hypot(diff(x), diff(y)) / knownMm;
+    
+    fprintf('Échelle calibrée : %.3f pixels/mm\n', pxPerMm);
+    close(fig);
 end

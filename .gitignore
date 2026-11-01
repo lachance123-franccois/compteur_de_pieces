@@ -6,14 +6,8 @@ slprj/
 *.mex*
 
 # Gros fichiers personnels (gardez les donnees lourdes hors du depot)
-data/*.wav
-data/*.mp3
-data/*.flac
-data/*.jpg
-data/*.png
-data/songs/
-data/pano/
-!data/README.md
+data/
+
 
 # Systeme
 .DS_Store
